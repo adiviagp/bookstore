@@ -1,15 +1,12 @@
 import Image from 'next/image';
-import { useState } from 'react';
-import Book from '../redux/book.types';
+import React, { useEffect } from 'react';
 import Rating from 'react-rating';
-import ButtonAdd from './ButtonAdd';
+import Wishlist from '../redux/wishlist.types';
 
 interface Props {
-  book: Book;
+  wishlist: Wishlist;
 }
-const Card: React.FC<Props> = ({ book }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
+const WishlistCard: React.FC<Props> = ({ wishlist }) => {
   const titleSlice = (data: string) => {
     if (data) return data.substring(0, 25);
     return data;
@@ -18,14 +15,13 @@ const Card: React.FC<Props> = ({ book }) => {
     if (data) return data.substring(0, 50) + '...';
     return data;
   };
-
   return (
     <div>
       <div className="bg-gray-100 min-h-[200px] mb-6 p-4 cursor-pointer hover:bg-gray-300 drop-shadow-md">
         <div className="flex">
           <div className="mt-[-30px]">
             <Image
-              src={book.volumeInfo.imageLinks.thumbnail}
+              src={wishlist.image}
               width="100"
               height="160"
               layout="fixed"
@@ -33,19 +29,15 @@ const Card: React.FC<Props> = ({ book }) => {
             />
           </div>
           <div className="px-4 py-2">
-            <h1 className="font-bold">{titleSlice(book.volumeInfo.title)}</h1>
+            <h1 className="font-bold">{titleSlice(wishlist.title)}</h1>
             <p className="font-light">
-              {titleSlice(
-                book.volumeInfo.authors ? book.volumeInfo.authors[0] : '-'
-              )}
+              {titleSlice(wishlist.author ? wishlist.author : '-')}
             </p>
 
-            <p className="font-light mt-2">
-              {descSlice(book.volumeInfo.description)}
-            </p>
+            <p className="font-light mt-2">{descSlice(wishlist.desc)}</p>
 
             <Rating
-              initialRating={book.volumeInfo.averageRating}
+              initialRating={wishlist.rating}
               readonly
               emptySymbol={
                 <svg
@@ -70,10 +62,15 @@ const Card: React.FC<Props> = ({ book }) => {
             />
           </div>
         </div>
-        <ButtonAdd book={book} />
+        <button
+          type="button"
+          className="inline-block w-full px-6 py-2.5 bg-gray-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-400 hover:shadow-lg focus:bg-gray-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+        >
+          Added To Wishlist
+        </button>
       </div>
     </div>
   );
 };
 
-export default Card;
+export default WishlistCard;
