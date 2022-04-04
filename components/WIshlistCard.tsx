@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import Book from '../redux/book.types';
 import Rating from 'react-rating';
 import Wishlist from '../redux/wishlist.types';
 

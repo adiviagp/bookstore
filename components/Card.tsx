@@ -2,11 +2,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Book from '../redux/book.types';
 import Rating from 'react-rating';
-import Wishlist from '../redux/wishlist.types';
-import Loading from './Loading';
-import IsAdded from '../util/IsAdded';
-import { store } from '../redux/store';
-import { getWishlist } from '../redux/wishlistSlice';
 import ButtonAdd from './ButtonAdd';
 
 interface Props {
