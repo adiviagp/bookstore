@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { bookSlice } from './bookSlice';
+import { wishlistSlice } from './wishlistSlice';
 
 export const store = configureStore({
   reducer: {
     books: bookSlice.reducer,
+    wishlists: wishlistSlice.reducer,
   },
 });
 
@@ -17,6 +19,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 export const { rehydrate, setSearch } = bookSlice.actions;
+export const { rehydrate: rehydrateWishlist, setSearch: searchWishlist } =
+  wishlistSlice.actions;
 
 export const selectSearch = (state: RootState) => state.books.search;
 export const selectFilteredBooks = (state: RootState) => state.books.books;
+
+export const selectWishlist = (state: RootState) => state.wishlists.wishlists;

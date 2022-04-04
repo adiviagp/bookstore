@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Book from './book.types';
 
-export type PokemonState = {
+export type BookState = {
   books: Book[];
   search: string;
   filteredBooks: Book[];
@@ -9,7 +9,7 @@ export type PokemonState = {
   error: boolean;
 };
 
-const initialState: PokemonState = {
+const initialState: BookState = {
   books: [],
   filteredBooks: [],
   search: '',
@@ -33,7 +33,7 @@ export const bookSlice = createSlice({
   name: 'book',
   initialState,
   reducers: {
-    rehydrate(state, action: PayloadAction<PokemonState>) {
+    rehydrate(state, action: PayloadAction<BookState>) {
       state.error = action.payload.error;
       state.pending = action.payload.pending;
       state.books = action.payload.books;
